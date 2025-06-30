@@ -1,4 +1,3 @@
-
 import genres from "../data/genres";
 
 export interface Genre {
@@ -9,6 +8,6 @@ export interface Genre {
 }
 
 
-const useGenres = () => ({ data: genres, isLoading: false, error: null }) 
+const useGenres = () => ({data: genres, isLoading: false, error: null});
 
 export default useGenres; 

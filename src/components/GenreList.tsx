@@ -9,8 +9,6 @@ import {
 } from "@chakra-ui/react";
 import useGenres, { type Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
-import useData from "../hooks/useData";
-import genres from "../data/genres";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
@@ -22,7 +20,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
   if (error) return null;
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner />;  
   return (
     <>
       <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
