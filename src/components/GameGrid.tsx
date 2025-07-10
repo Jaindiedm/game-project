@@ -15,6 +15,8 @@ const  GameGrid = ({gameQuery}: Props) => {
 
   if (error) return <Text>{error}</Text>;
 
+  if (!isLoading && data.length === 0) return <Text>No games found.</Text>;
+
   return (
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
