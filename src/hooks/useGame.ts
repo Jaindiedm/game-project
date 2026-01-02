@@ -21,8 +21,7 @@ export interface Game {
 }
 
 const useGames = (gameQuery: GameQuery) => {
-  console.log("Fetching games with:", gameQuery); 
-  return useData<Game>("/games", {
+  return useData<Game>("games", {
     params: {
       genres: gameQuery.genre?.id,
       platforms: gameQuery.platform?.id,
