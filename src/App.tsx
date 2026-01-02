@@ -9,6 +9,7 @@ import type { Platform } from "./hooks/useGame";
 import SortSelector from "./components/SortSelector";
 import "./index.css";
 import GameHeading from "./components/GameHeading";
+import ChatBot from "./components/ChatBot";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -65,6 +66,7 @@ function App() {
         </Box>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
+      <ChatBot/>
     </Grid>
   );
 }
