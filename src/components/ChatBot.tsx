@@ -26,19 +26,10 @@ import apiClient from "../services/api-client";
 // Component to render formatted text
 interface FormattedMessageProps {
   text: string;
-  color?: string;
 }
 
-const FormattedMessage = ({ text, color }: FormattedMessageProps) => {
-  interface RenderFormattedTextProps {
-    text: string;
-    color?: string;
-  }
-
-  const renderFormattedText = (
-    text: string,
-    color?: string
-  ): React.ReactNode[] => {
+const FormattedMessage = ({ text }: FormattedMessageProps) => {
+  const renderFormattedText = (text: string): React.ReactNode[] => {
     const lines: string[] = text.split("\n");
     const elements: React.ReactNode[] = [];
     let listItems: React.ReactNode[] = [];
@@ -50,7 +41,7 @@ const FormattedMessage = ({ text, color }: FormattedMessageProps) => {
         const content: string = line.trim().replace(/^[\*\-•]\s+/, "");
         listItems.push(
           <ListItem key={`list-${lineIndex}`} ml={2}>
-            {parseInlineFormatting(content, color)}
+            {parseInlineFormatting(content)}
           </ListItem>
         );
         inList = true;
@@ -70,7 +61,7 @@ const FormattedMessage = ({ text, color }: FormattedMessageProps) => {
         if (line.trim()) {
           elements.push(
             <Text key={`text-${lineIndex}`} mb={line.trim() ? 2 : 0}>
-              {parseInlineFormatting(line, color)}
+              {parseInlineFormatting(line)}
             </Text>
           );
         }
@@ -89,12 +80,11 @@ const FormattedMessage = ({ text, color }: FormattedMessageProps) => {
     return elements;
   };
 
-  const parseInlineFormatting = (text: string, color?: string) => {
+  const parseInlineFormatting = (text: string) => {
     const parts = [];
     let currentIndex = 0;
 
     // Regex to match **bold** and *italic*
-    // Removed emoji regex as it's not necessary - emojis render fine as-is
     const regex = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
     let match;
 
@@ -354,7 +344,7 @@ const ChatBot = () => {
                   wordBreak="break-word"
                 >
                   {msg.sender === "bot" ? (
-                    <FormattedMessage text={msg.text} color={botColor} />
+                    <FormattedMessage text={msg.text} />
                   ) : (
                     <Text whiteSpace="pre-wrap">{msg.text}</Text>
                   )}
