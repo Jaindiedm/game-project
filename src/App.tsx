@@ -2,6 +2,7 @@ import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
+import GenreSelector from "./components/GenreSelector";
 import { useState } from "react";
 import type { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
@@ -48,6 +49,14 @@ function App() {
         <Box paddingLeft={2}>
           <GameHeading gameQuery={gameQuery} />
           <Flex marginBottom={5}>
+            <Show below="lg">
+              <Box marginRight={5}>
+                <GenreSelector
+                  selectedGenre={gameQuery.genre}
+                  onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+                />
+              </Box>
+            </Show>
             <Box marginRight={5}>
               <PlatformSelector
                 selectedPlatform={gameQuery.platform}
@@ -66,7 +75,7 @@ function App() {
         </Box>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
-      <ChatBot/>
+      <ChatBot />
     </Grid>
   );
 }
