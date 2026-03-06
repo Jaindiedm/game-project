@@ -32,7 +32,7 @@ const useData = <T>(
           },
         })
         .then((res) => {
-          setData(res.data.results);
+          setData(res.data.results || []);
           setLoading(false);
         })
         .catch((err) => {
