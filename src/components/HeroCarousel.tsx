@@ -61,7 +61,7 @@ const HeroCarousel = () => {
         background="linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 100%)"
       />
 
-      <Box position="absolute" bottom={0} left={0} padding="40px">
+      <Box position="absolute" bottom="80px" left={0} padding="40px">
         <Text fontSize="6xl" fontWeight={900} color="white" maxW="600px" lineHeight={1.1}>
           {game.name}
         </Text>
@@ -78,7 +78,7 @@ const HeroCarousel = () => {
       <IconButton
         position="absolute"
         left="12px"
-        top="50%"
+        top="40%"
         transform="translateY(-50%)"
         aria-label="Previous slider"
         icon={<ChevronLeftIcon />}
@@ -94,7 +94,7 @@ const HeroCarousel = () => {
       <IconButton
         position="absolute"
         right="12px"
-        top="50%"
+        top="40%"
         transform="translateY(-50%)"
         aria-label="Next slider"
         icon={<ChevronRightIcon />}
@@ -109,7 +109,7 @@ const HeroCarousel = () => {
 
       <Box
         position="absolute"
-        bottom="16px"
+        bottom="100px"
         left="50%"
         transform="translateX(-50%)"
         display="flex"

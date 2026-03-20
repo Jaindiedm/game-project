@@ -12,7 +12,19 @@ const FeaturedGames = () => {
   if (isLoading || !games || games.length === 0) return null;
 
   return (
-    <Box width="100%" bg="#151515" borderRadius="24px" padding={{ base: "20px", md: "40px" }} mb={10}>
+    <Box 
+      width="100%" 
+      maxW="1200px" 
+      mx="auto" 
+      mt={{ base: "-40px", md: "-100px" }} 
+      position="relative" 
+      zIndex={2} 
+      bg="#151515" 
+      borderRadius="24px" 
+      padding={{ base: "20px", md: "40px" }} 
+      mb={10}
+      boxShadow="0 -10px 40px rgba(0,0,0,0.5)"
+    >
       {games.map((game, index) => {
         const isOdd = index % 2 !== 0;
         const rating = Math.round(game.rating || 0);
