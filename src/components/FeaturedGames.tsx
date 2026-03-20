@@ -2,26 +2,29 @@ import { Box, Image, Text, HStack, Button, VStack } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import useData from "../hooks/useData";
 import type { Game } from "../hooks/useGame";
+import getCroppedImageUrl from "../services/image-url";
 
 const FeaturedGames = () => {
-  const { data: games, isLoading, error } = useData<Game>("games", {
-    params: { ordering: "-metacritic", page_size: 4 },
+  const { data, isLoading, error } = useData<Game>("games", {
+    params: { ordering: "-metacritic", page_size: 10 },
   });
+
+  const games = data?.filter(game => game.background_image).slice(0, 4) || [];
 
   if (error) return null;
   if (isLoading || !games || games.length === 0) return null;
 
   return (
-    <Box 
-      width="100%" 
-      maxW="1200px" 
-      mx="auto" 
-      mt={{ base: "-40px", md: "-100px" }} 
-      position="relative" 
-      zIndex={2} 
-      bg="#151515" 
-      borderRadius="24px" 
-      padding={{ base: "20px", md: "40px" }} 
+    <Box
+      width="100%"
+      maxW="1200px"
+      mx="auto"
+      mt={{ base: "-40px", md: "-100px" }}
+      position="relative"
+      zIndex={2}
+      bg="#151515"
+      borderRadius="24px"
+      padding={{ base: "20px", md: "40px" }}
       mb={10}
       boxShadow="0 -10px 40px rgba(0,0,0,0.5)"
     >
@@ -33,7 +36,8 @@ const FeaturedGames = () => {
         const imageBox = (
           <Box flex="3" height={{ base: "200px", md: "280px" }} overflow="hidden" borderRadius="16px">
             <Image
-              src={game.background_image}
+              src={game.background_image || getCroppedImageUrl("")}
+              fallbackSrc={getCroppedImageUrl("")}
               alt={game.name}
               width="100%"
               height="100%"
@@ -61,7 +65,7 @@ const FeaturedGames = () => {
             <Text fontSize="sm" color="gray.300" noOfLines={4} lineHeight={1.6}>
               {description}
             </Text>
-            
+
             <HStack mt={8} justify="space-between" align="flex-end">
               <Button size="sm" variant="outline" borderColor="#4ECDC4" color="#4ECDC4" _hover={{ bg: "rgba(78, 205, 196, 0.1)" }}>
                 More

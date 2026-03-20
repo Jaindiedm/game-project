@@ -3,11 +3,14 @@ import { Box, HStack, Image, Text, Button, IconButton } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import useData from "../hooks/useData";
 import type { Game } from "../hooks/useGame";
+import getCroppedImageUrl from "../services/image-url";
 
 const HeroCarousel = () => {
-  const { data: games, isLoading, error } = useData<Game>("games", {
-    params: { ordering: "-metacritic", page_size: 5 },
+  const { data, isLoading, error } = useData<Game>("games", {
+    params: { ordering: "-metacritic", page_size: 10 },
   });
+
+  const games = data?.filter(game => game.background_image).slice(0, 5) || [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -17,7 +20,7 @@ const HeroCarousel = () => {
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev === games.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, [games, isHovered]);
@@ -47,7 +50,8 @@ const HeroCarousel = () => {
     >
       <Box transition="opacity 0.5s ease" opacity={1} width="100%" height="100%">
         <Image
-          src={game.background_image}
+          src={game.background_image || getCroppedImageUrl("")}
+          fallbackSrc={getCroppedImageUrl("")}
           objectFit="cover"
           width="100%"
           height="100%"
