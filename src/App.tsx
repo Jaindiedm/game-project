@@ -30,6 +30,12 @@ function App() {
         onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
       />
       <HeroCarousel />
+      
+      {/* Centered Overlapping Featured Section */}
+      <Box px={{ base: 4, md: 8 }}>
+        <FeaturedGames />
+      </Box>
+
       <Grid
         templateAreas={{
           base: `"main"`,
@@ -51,8 +57,6 @@ function App() {
 
         <GridItem area="main">
           <Box paddingLeft={2}>
-            <FeaturedGames />
-            
             <Flex marginBottom={5} marginTop={5}>
               <Show below="lg">
                 <Box marginRight={5}>

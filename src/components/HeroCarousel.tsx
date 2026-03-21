@@ -3,11 +3,14 @@ import { Box, HStack, Image, Text, Button, IconButton } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import useData from "../hooks/useData";
 import type { Game } from "../hooks/useGame";
+import getCroppedImageUrl from "../services/image-url";
 
 const HeroCarousel = () => {
-  const { data: games, isLoading, error } = useData<Game>("games", {
-    params: { ordering: "-metacritic", page_size: 5 },
+  const { data, isLoading, error } = useData<Game>("games", {
+    params: { ordering: "-metacritic", page_size: 10 },
   });
+
+  const games = data?.filter(game => game.background_image).slice(0, 5) || [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -17,7 +20,7 @@ const HeroCarousel = () => {
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev === games.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, [games, isHovered]);
@@ -47,7 +50,8 @@ const HeroCarousel = () => {
     >
       <Box transition="opacity 0.5s ease" opacity={1} width="100%" height="100%">
         <Image
-          src={game.background_image}
+          src={game.background_image || getCroppedImageUrl("")}
+          fallbackSrc={getCroppedImageUrl("")}
           objectFit="cover"
           width="100%"
           height="100%"
@@ -61,7 +65,7 @@ const HeroCarousel = () => {
         background="linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 100%)"
       />
 
-      <Box position="absolute" bottom={0} left={0} padding="40px">
+      <Box position="absolute" bottom="80px" left={0} padding="40px">
         <Text fontSize="6xl" fontWeight={900} color="white" maxW="600px" lineHeight={1.1}>
           {game.name}
         </Text>
@@ -78,7 +82,7 @@ const HeroCarousel = () => {
       <IconButton
         position="absolute"
         left="12px"
-        top="50%"
+        top="40%"
         transform="translateY(-50%)"
         aria-label="Previous slider"
         icon={<ChevronLeftIcon />}
@@ -94,7 +98,7 @@ const HeroCarousel = () => {
       <IconButton
         position="absolute"
         right="12px"
-        top="50%"
+        top="40%"
         transform="translateY(-50%)"
         aria-label="Next slider"
         icon={<ChevronRightIcon />}
@@ -109,7 +113,7 @@ const HeroCarousel = () => {
 
       <Box
         position="absolute"
-        bottom="16px"
+        bottom="100px"
         left="50%"
         transform="translateX(-50%)"
         display="flex"
