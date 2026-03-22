@@ -1,4 +1,4 @@
-import { Box, Image, Text, HStack, Button, VStack } from "@chakra-ui/react";
+import { Box, Image, Text, HStack, Button, VStack, useColorModeValue } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import useData from "../hooks/useData";
 import type { Game } from "../hooks/useGame";
@@ -22,7 +22,7 @@ const FeaturedGames = () => {
       mt={{ base: "-40px", md: "-100px" }}
       position="relative"
       zIndex={2}
-      bg="#151515"
+      bg={useColorModeValue("white", "#151515")}
       borderRadius="24px"
       padding={{ base: "20px", md: "40px" }}
       mb={10}
@@ -56,13 +56,13 @@ const FeaturedGames = () => {
             flexDirection="column"
             justifyContent="center"
           >
-            <Text fontSize="lg" color="gray.400" mb={1}>
+            <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.400")} mb={1}>
               {game.genres?.[0]?.name || "Featured Title"}
             </Text>
-            <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold" color="white" lineHeight={1.1} mb={4}>
+            <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold" color={useColorModeValue("gray.800", "white")} lineHeight={1.1} mb={4}>
               {game.name}
             </Text>
-            <Text fontSize="sm" color="gray.300" noOfLines={4} lineHeight={1.6}>
+            <Text fontSize="sm" color={useColorModeValue("gray.600", "gray.300")} noOfLines={4} lineHeight={1.6}>
               {description}
             </Text>
 
@@ -71,13 +71,13 @@ const FeaturedGames = () => {
                 More
               </Button>
               <VStack align="flex-end" spacing={0}>
-                <Text fontSize="xs" color="gray.400">1 year</Text>
+                <Text fontSize="xs" color={useColorModeValue("gray.600", "gray.400")}>1 year</Text>
                 <HStack spacing="2px" my={1}>
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <StarIcon key={star} color={star <= rating ? "yellow.400" : "gray.600"} boxSize="10px" />
+                    <StarIcon key={star} color={star <= rating ? "yellow.400" : useColorModeValue("gray.300", "gray.600")} boxSize="10px" />
                   ))}
                 </HStack>
-                <Text fontSize="xs" color="gray.500">({game.metacritic || 85})</Text>
+                <Text fontSize="xs" color={useColorModeValue("gray.600", "gray.500")}>({game.metacritic || 85})</Text>
               </VStack>
             </HStack>
           </Box>
