@@ -1,4 +1,5 @@
-import { Box, Heading, HStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, HStack, useColorModeValue, Button, Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import useData from "../hooks/useData";
 import type { Game } from "../hooks/useGame";
 import GameCard from "./GameCard";
@@ -59,6 +60,14 @@ const TopRatedGames = () => {
           ))}
         </HStack>
       </Box>
+
+      <Flex justifyContent="center" mt={8}>
+        <Link to="/games">
+          <Button size="lg" bg="#4ECDC4" color="black" _hover={{ bg: "#3dbbb2" }} borderRadius="8px" fontWeight="bold">
+            See More Games
+          </Button>
+        </Link>
+      </Flex>
     </Box>
   );
 };

@@ -1,12 +1,13 @@
-import { HStack, Image, Button, Text, Box } from "@chakra-ui/react"
+import { HStack, Image, Button, Text, Box, useColorModeValue } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 import logo from "../assets/gamehub_logo.png"
 import ColorModeSwitch from "./ColorModeSwitch"
 import SearchInput from "./SearchInput"
 
 const NavBar = () => {
+  const bg = useColorModeValue("white", "#151515");
   return (
-    <HStack padding={{ base: "10px 16px", md: "15px 32px" }} justifyContent="space-between" width="100%">
+    <HStack padding={{ base: "10px 16px", md: "15px 32px" }} justifyContent="space-between" width="100%" position="sticky" top={0} zIndex={1000} bg={bg}>
         <Link to="/">
             <HStack>
                 <Image src={logo} boxSize={{ base: "40px", md: "50px" }} borderRadius={6} objectFit="contain" />
