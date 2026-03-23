@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import HeroCarousel from "./components/HeroCarousel";
 import FeaturedGames from "./components/FeaturedGames";
+import TopRatedGames from "./components/TopRatedGames";
 import Footer from "./components/Footer";
 import "./index.css";
 import ChatBot from "./components/ChatBot";
@@ -14,6 +15,8 @@ function App() {
       <Box px={{ base: 4, md: 8 }}>
         <FeaturedGames />
       </Box>
+
+      <TopRatedGames />
 
       <ChatBot />
       <Footer />

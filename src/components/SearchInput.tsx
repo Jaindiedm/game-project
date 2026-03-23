@@ -10,7 +10,7 @@ const SearchInput = () => {
     const navigate = useNavigate();
 
   return (
-    <Box flex={1} maxW="500px">
+    <Box width="100%" maxW="600px">
       <form onSubmit={(event) => {
           event.preventDefault();
           if (ref.current) {
